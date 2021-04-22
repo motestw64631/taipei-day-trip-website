@@ -29,7 +29,8 @@ def attractionbyid(a_id):
 				'message':f'Cannot find the ID {a_id}'
 			}),400
 		return jsonify({'data':data}),200
-	except:
+	except Exception as e:
+		print(e)
 		return jsonify({
 				'error':True,
 				'message':f'Internal server error'
@@ -44,7 +45,8 @@ def find_attractions():
 		if not keyword:
 			return jsonify(find_attraction_all(page)),200
 		return jsonify(find_attraction_by_name(keyword,page)),200
-	except:
+	except Exception as e:
+		print(e)
 		return jsonify({
 			'error':True,
 			'message':f'Internal server error'
