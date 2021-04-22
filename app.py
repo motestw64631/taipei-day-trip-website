@@ -1,7 +1,9 @@
 from flask import *
+from data.utils import *
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
+app.config['JSON_SORT_KEYS'] = False
 
 # Pages
 @app.route("/")
@@ -17,4 +19,37 @@ def booking():
 def thankyou():
 	return render_template("thankyou.html")
 
-app.run(port=3000)
+@app.route('/api/attraction/<a_id>')
+def attractionbyid(a_id):
+	try:
+		data = find_attraction_by_id(a_id)
+		if not data:
+			return jsonify({
+				'error':True,
+				'message':f'Cannot find the ID {a_id}'
+			}),400
+		return jsonify({'data':data}),200
+	except Exception as e:
+		print(e)
+		return jsonify({
+				'error':True,
+				'message':f'Internal server error'
+				}),500
+
+@app.route('/api/attractions')
+def find_attractions():
+	try:
+		page = request.args.get('page')
+		keyword = request.args.get('keyword')
+		page = int(page)
+		if not keyword:
+			return jsonify(find_attraction_all(page)),200
+		return jsonify(find_attraction_by_name(keyword,page)),200
+	except Exception as e:
+		print(e)
+		return jsonify({
+			'error':True,
+			'message':f'Internal server error'
+			}),500
+
+app.run(host='0.0.0.0',port=3000)
