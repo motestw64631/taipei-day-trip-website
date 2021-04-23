@@ -7,7 +7,7 @@ from sqlalchemy.orm import sessionmaker,relationship,backref
 
 Base = declarative_base()
 
-engine = create_engine('mysql+mysqlconnector://root:motestw64631@localhost:3306/travelweb')
+engine = create_engine('mysql+mysqlconnector://root:motestw64631@localhost:3306/travelweb', pool_pre_ping=True,pool_recycle=10)
 
 
 class TravelSpot(Base):

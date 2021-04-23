@@ -1,9 +1,15 @@
 from flask import *
-from data.utils import *
+from flask_sqlalchemy import SQLAlchemy
+
+
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
 app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config['JSON_SORT_KEYS'] = False
+app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
+
+db = SQLAlchemy(app)
+from data.utils import *
 
 # Pages
 @app.route("/")

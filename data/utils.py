@@ -4,10 +4,8 @@ from sqlalchemy.orm import sessionmaker
 Session = sessionmaker(bind=engine)
 session=Session()
 
-'''
-for i in session.query(TravelSpot).filter_by(id=1):
-    print(i.name)
-'''
+
+
 
 def data_to_json(data):
     return {
