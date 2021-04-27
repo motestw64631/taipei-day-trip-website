@@ -1,13 +1,18 @@
 from .createDB import Base,engine,TravelSpot,Url
+from sqlalchemy import or_
 from sqlalchemy.orm import sessionmaker
 
 Session = sessionmaker(bind=engine)
 session=Session()
 
-'''
-for i in session.query(TravelSpot).filter_by(id=1):
-    print(i.name)
-'''
+
+def connection_check():
+    try:
+        session.query(TravelSpot).filter_by(id=0).first()
+    except:
+        session.rollback()
+
+
 
 def data_to_json(data):
     return {
@@ -39,10 +44,10 @@ def find_attraction_all(page):
 
 
 def find_attraction_by_name(name,page):
-    data_count =  session.query(TravelSpot).filter(TravelSpot.name.like(f'%{name}%')).count()
+    data_count =  session.query(TravelSpot).filter(or_(TravelSpot.name.like(f'%{name}%'),TravelSpot.category.like(f'%{name}%'))).count()
     page_count = data_count//12
     next_page = page+1 if page<page_count else None
-    data = session.query(TravelSpot).filter(TravelSpot.name.like(f'%{name}%')).slice(12*page,12*(page+1)).all()
+    data = session.query(TravelSpot).filter(or_(TravelSpot.name.like(f'%{name}%'),TravelSpot.category.like(f'%{name}%'))).slice(12*page,12*(page+1)).all()
     data_json = [data_to_json(i) for i in data]
     return {'nextPage':next_page,'data':data_json}
 
