@@ -9,10 +9,10 @@
     <script src='static/script.js'></script>
 </head>
 
-<body onload="loadImages(0)">
+<body>
     <nav>
         <span id='outter_title'><span id='title'>台北一日遊</span><span><span class='inner_right'>預定行程</span><span
-                    class='inner_right'>登入/註冊</span></span></span>
+                    class='inner_right' id='popbtn'>登入/註冊</span></span></span>
     </nav>
     <header>
         <div id='outter_header'>
@@ -27,11 +27,43 @@
         <div id='contentBox'>
 
         </div>
+        <div class="popup" id="popup">
+            <div class="popup_header"></div>
+            <div class="popupcontent" id="popupcontent">
+                <div class="popup_title">登入會員帳號</div>
+                <img class="close_icon" id='close' src="static/icon_close.png">
+                <input id='login_email' class='popup_input' placeholder="輸入電子信箱">
+                <input id='login_password' type="password" class='popup_input' placeholder="輸入密碼">
+                <div class="popup_input" id="login_button">
+                    登入帳戶
+                </div>
+                <div class="popup_footer">
+                    還沒有帳戶？<a href="#" id='switchTosign'>點此註冊</a>
+                </div>
+            </div>
+        </div>
+        <div class="popup" id="popup_2">
+            <div class="popup_header"></div>
+            <div class="popupcontent" id="popupcontent_2">
+                <div class="popup_title">註冊會員帳號</div>
+                <img class="close_icon" id='close_2' src="static/icon_close.png">
+                <input id='sign_name' class='popup_input' placeholder="輸入姓名">
+                <input id='sign_email' class='popup_input' placeholder="輸入電子信箱">
+                <input id='sign_password' type="password" class='popup_input' placeholder="輸入密碼">
+                <div class="popup_input" id="sign_button">
+                    註冊帳戶
+                </div>
+                <div class="popup_footer">
+                    已經有帳戶了？<a href="#" id='switchTologin'>點此登入</a>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
         COPYRIGHT © 2021 台北一日遊
     </footer>
 
 </body>
+
 
 </html>

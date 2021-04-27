@@ -44,6 +44,7 @@ footer{
     color: #FFFFFF;
 }
 
+
 #outter_title{
     width: 62.5%;
     display: flex;
@@ -76,7 +77,11 @@ footer{
     line-height: 13px;
     color: #666666;
     margin-left:20px;
+    cursor: pointer;
+}
 
+.inner_right:hover{
+    background-color: rgb(145, 219, 219);
 }
 
 #welcome{
@@ -138,6 +143,7 @@ footer{
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 }
 
 .imgOut{
@@ -246,4 +252,113 @@ footer{
         width: 100%;
         justify-content: center;
     }
+}
+
+    .popup{
+        position: absolute;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.25);
+        width: 100%;
+        height: 100%;
+        display: none;
+        flex-direction: column;
+        align-items: center;
     }
+
+
+    .popup_header{
+        width: 340px;
+        height: 10px;
+        margin-top: 80px;
+        background: linear-gradient(270deg, #337788 0%, #66AABB 100%);
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+    }
+
+    .popup_title{
+        font-family: Noto Sans TC;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #666666;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    
+
+    .popup_input{
+        border: 1px solid #CCCCCC;
+        box-sizing: border-box;
+        border-radius: 5px;
+        width: 310px;
+        height: 47px;
+        margin-bottom: 10px;
+        font-family: Noto Sans TC;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 13px;
+        /* or 83% */
+
+        display: flex;
+        align-items: center;
+        padding-left: 15px;
+        /* Gray 800 */
+
+        color: #666666;
+    }
+
+    .popupcontent{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 340px;
+        height: 265px;
+        background-color: white;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+
+    #popupcontent_2{
+        height: 322px;
+    }
+
+    .close_icon{
+        position: absolute;
+        top:17px;
+        left: 307px;
+        cursor: pointer;
+    }
+
+    #login_button,#sign_button{
+        background: #448899;
+        font-family: Noto Sans TC;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 19px;
+        line-height: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        cursor: pointer;
+    }
+
+.popup_footer{
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #666666;
+    height: 22px;
+}

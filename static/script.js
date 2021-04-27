@@ -1,6 +1,7 @@
 let nextPage = 0;
 let searchKeyword;
 
+
 function loadImages(page, keyword = searchKeyword) {
     let contentBox = document.getElementById('contentBox');
     let url = (keyword == undefined) ? `http://localhost:3000/api/attractions?page=${page}` : `http://localhost:3000/api/attractions?page=${page}&keyword=${keyword}`;
@@ -9,6 +10,10 @@ function loadImages(page, keyword = searchKeyword) {
             return response.json()
         })
         .then(function (myJson) {
+            if (myJson['data'].length == 0) {
+                contentBox.textContent = '搜尋無結果'
+                return
+            }
             for (let i = 0; i < myJson['data'].length; i++) {
                 let content = document.createElement('div');
                 content.className = 'imgOut';
@@ -58,6 +63,40 @@ function loadImagesbysearch() {
     loadImages(0, keyword = searchKeyword);
 }
 
+
+window.onload=function(){
+    loadImages(0);
+    let loginDiv = document.getElementById('popupcontent');
+    let clone = loginDiv.cloneNode(true);
+    document.getElementById('popbtn').addEventListener('click',function(){
+        document.getElementById('popup').style.display='flex';
+    });
+    document.getElementById('close').addEventListener('click',function(){
+        document.getElementById('popup').style.display='none';
+    })
+    document.getElementById('close_2').addEventListener('click',function(){
+        document.getElementById('popup_2').style.display='none';
+    })
+    document.getElementById('switchTosign').addEventListener('click',function(){
+        document.getElementById('popup').style.display='none';
+        document.getElementById('popup_2').style.display='flex';
+    })
+    document.getElementById('switchTologin').addEventListener('click',function(){
+        document.getElementById('popup').style.display='flex';
+        document.getElementById('popup_2').style.display='none';
+    })
+    document.getElementById('login_button').addEventListener('click',function(){
+        let email = document.getElementById('login_email').value;
+        let password = document.getElementById('login_password').value;
+        console.log(`${email},${password}`)
+    })
+    document.getElementById('sign_button').addEventListener('click',function(){
+        let name = document.getElementById('sign_name').value;
+        let email = document.getElementById('sign_email').value;
+        let password = document.getElementById('sign_password').value;
+        console.log(`${name},${email},${password}`)
+    })
+}
 
 
 
