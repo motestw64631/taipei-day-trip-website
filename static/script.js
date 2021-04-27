@@ -1,0 +1,71 @@
+let nextPage = 0;
+let searchKeyword;
+
+function loadImages(page, keyword = searchKeyword) {
+    let contentBox = document.getElementById('contentBox');
+    let url = (keyword == undefined) ? `http://localhost:3000/api/attractions?page=${page}` : `http://localhost:3000/api/attractions?page=${page}&keyword=${keyword}`;
+    fetch(url)
+        .then(function (response) {
+            return response.json()
+        })
+        .then(function (myJson) {
+            for (let i = 0; i < myJson['data'].length; i++) {
+                let content = document.createElement('div');
+                content.className = 'imgOut';
+                let img = document.createElement('img');
+                let text = document.createElement('div');
+                let desc = document.createElement('div');
+                let desc_l = document.createElement('div');
+                let desc_r = document.createElement('div');
+                img.className = 'attImage';
+                desc.className = 'desc';
+                desc_l.className = 'desc_l';
+                desc_r.className = 'desc_r';
+                desc_l.textContent = myJson['data'][i]['mrt'];
+                desc_r.textContent = myJson['data'][i]['category'];
+                text.textContent = myJson['data'][i]['name'];
+                desc.appendChild(desc_l);
+                desc.appendChild(desc_r);
+                text.className = 'attName';
+                img.src = myJson['data'][i]['img'][0];
+                img.setAttribute('width', 268);
+                img.setAttribute('height', 160);
+                content.appendChild(img);
+                content.appendChild(text);
+                content.appendChild(desc);
+                contentBox.appendChild(content);
+                nextPage = myJson['nextPage'];
+
+            }
+            let childCount = document.getElementById("contentBox").childElementCount;
+            if ((childCount % 4) != 0) {
+                for (i = 0; i < 4 - (childCount % 4); i++) {
+                    let content = document.createElement('div');
+                    content.className = 'imgOut_psu';
+                    contentBox.appendChild(content);
+                }
+            };
+        })
+}
+
+
+function loadImagesbysearch() {
+    searchKeyword = document.getElementById('search').value;
+    var div = document.getElementById('contentBox');
+    while (div.firstChild) {
+        div.removeChild(div.firstChild);
+    }
+    loadImages(0, keyword = searchKeyword);
+}
+
+
+
+
+window.onscroll = function (ev) {
+    if (nextPage != null) {
+        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+            loadImages(nextPage);
+        }
+    }
+}
+

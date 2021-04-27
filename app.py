@@ -1,6 +1,6 @@
 from flask import *
 from flask_sqlalchemy import SQLAlchemy
-
+from data.utils import *
 
 app=Flask(__name__)
 app.config["JSON_AS_ASCII"]=False
@@ -8,8 +8,6 @@ app.config["TEMPLATES_AUTO_RELOAD"]=True
 app.config['JSON_SORT_KEYS'] = False
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True
 
-db = SQLAlchemy(app)
-from data.utils import *
 
 # Pages
 @app.route("/")
@@ -28,6 +26,7 @@ def thankyou():
 @app.route('/api/attraction/<a_id>')
 def attractionbyid(a_id):
 	try:
+		connection_check()
 		data = find_attraction_by_id(a_id)
 		if not data:
 			return jsonify({
@@ -45,6 +44,7 @@ def attractionbyid(a_id):
 @app.route('/api/attractions')
 def find_attractions():
 	try:
+		connection_check()
 		page = request.args.get('page')
 		keyword = request.args.get('keyword')
 		page = int(page)
