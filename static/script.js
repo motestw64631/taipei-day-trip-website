@@ -1,10 +1,11 @@
 let nextPage = 0;
+var timeout;
 let searchKeyword;
 
 
 function loadImages(page, keyword = searchKeyword) {
     let contentBox = document.getElementById('contentBox');
-    let url = (keyword == undefined) ? `http://localhost:3000/api/attractions?page=${page}` : `http://localhost:3000/api/attractions?page=${page}&keyword=${keyword}`;
+    let url = (keyword == undefined) ? `/api/attractions?page=${page}` : `http://localhost:3000/api/attractions?page=${page}&keyword=${keyword}`;
     fetch(url)
         .then(function (response) {
             return response.json()
@@ -26,6 +27,7 @@ function loadImages(page, keyword = searchKeyword) {
                 desc.className = 'desc';
                 desc_l.className = 'desc_l';
                 desc_r.className = 'desc_r';
+                let hId = myJson['data'][i]['id'];
                 desc_l.textContent = myJson['data'][i]['mrt'];
                 desc_r.textContent = myJson['data'][i]['category'];
                 text.textContent = myJson['data'][i]['name'];
@@ -40,7 +42,9 @@ function loadImages(page, keyword = searchKeyword) {
                 content.appendChild(desc);
                 contentBox.appendChild(content);
                 nextPage = myJson['nextPage'];
-
+                content.addEventListener('click',function(){
+                    window.location.href = `/attraction/${hId}`
+                })
             }
             let childCount = document.getElementById("contentBox").childElementCount;
             if ((childCount % 4) != 0) {
@@ -64,33 +68,51 @@ function loadImagesbysearch() {
 }
 
 
-window.onload=function(){
-    loadImages(0);
+window.onload = function () {
+    clearTimeout(timeout)
+    timeout = setTimeout(function () {
+        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight * 0.95) {
+            loadImages(0);;
+        };
+    }, 150)
     let loginDiv = document.getElementById('popupcontent');
     let clone = loginDiv.cloneNode(true);
-    document.getElementById('popbtn').addEventListener('click',function(){
-        document.getElementById('popup').style.display='flex';
+    window.addEventListener('scroll', function () {
+        if (nextPage != null) {
+            clearTimeout(timeout)
+            timeout = setTimeout(function () {
+                if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight * 0.95) {
+                    loadImages(nextPage);
+                };
+            }, 150);
+        }
+    })
+    document.getElementById('title').addEventListener('click',function(){
+        window.location.href = "/";
+    })
+    document.getElementById('popbtn').addEventListener('click', function () {
+        document.getElementById('popup').style.display = 'flex';
     });
-    document.getElementById('close').addEventListener('click',function(){
-        document.getElementById('popup').style.display='none';
+    document.getElementById('close').addEventListener('click', function () {
+        document.getElementById('popup').style.display = 'none';
     })
-    document.getElementById('close_2').addEventListener('click',function(){
-        document.getElementById('popup_2').style.display='none';
+    document.getElementById('close_2').addEventListener('click', function () {
+        document.getElementById('popup_2').style.display = 'none';
     })
-    document.getElementById('switchTosign').addEventListener('click',function(){
-        document.getElementById('popup').style.display='none';
-        document.getElementById('popup_2').style.display='flex';
+    document.getElementById('switchTosign').addEventListener('click', function () {
+        document.getElementById('popup').style.display = 'none';
+        document.getElementById('popup_2').style.display = 'flex';
     })
-    document.getElementById('switchTologin').addEventListener('click',function(){
-        document.getElementById('popup').style.display='flex';
-        document.getElementById('popup_2').style.display='none';
+    document.getElementById('switchTologin').addEventListener('click', function () {
+        document.getElementById('popup').style.display = 'flex';
+        document.getElementById('popup_2').style.display = 'none';
     })
-    document.getElementById('login_button').addEventListener('click',function(){
+    document.getElementById('login_button').addEventListener('click', function () {
         let email = document.getElementById('login_email').value;
         let password = document.getElementById('login_password').value;
         console.log(`${email},${password}`)
     })
-    document.getElementById('sign_button').addEventListener('click',function(){
+    document.getElementById('sign_button').addEventListener('click', function () {
         let name = document.getElementById('sign_name').value;
         let email = document.getElementById('sign_email').value;
         let password = document.getElementById('sign_password').value;
@@ -99,12 +121,4 @@ window.onload=function(){
 }
 
 
-
-window.onscroll = function (ev) {
-    if (nextPage != null) {
-        if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-            loadImages(nextPage);
-        }
-    }
-}
 

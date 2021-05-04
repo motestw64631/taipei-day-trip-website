@@ -1,8 +1,32 @@
+* { 
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+     box-sizing: border-box; 
+}
+
+
 body{
     padding: 0px;
     margin: 0px;
+    font-family: Noto Sans TC;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+
+    /* Gray 800 */
+
+    color: #666666;
+
 }
 
+hr {
+    margin: 0;
+    margin-top: 37px;
+    margin-bottom: 50px;
+    align-self: center;
+    width: 62.5%;
+    border: 1px solid #E8E8E8;
+  }
 span{
     margin: 0px;
     padding: 0px;
@@ -12,22 +36,21 @@ nav{
     position: sticky;
     margin: 0px;
     padding: 0px;
-    height: 54px;
     top:0px;
+    height: 54px;
     background-color: rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #E8E8E8;
+    z-index:999;
 }
 
-header{
-    height: 320px;
-    background:linear-gradient(135deg,#AADDEE,#66AABB);
-}
 
 main{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 37px;
 }
 
 footer{
@@ -44,6 +67,14 @@ footer{
     font-size: 16px;
     line-height: 13px;
     color: #FFFFFF;
+    margin-top: 120px;
+}
+
+input[type='radio']{
+    height: 22px;
+    width: 22px;
+    border: 0px;
+    vertical-align: middle;
 }
 
 
@@ -56,25 +87,16 @@ footer{
 
 #title{
     display: flex;
+    justify-content: center;
     align-items: center;
+    font-weight: bold;
     width: 150px;
-    height: 34px;
+    height: 100%;
     font-size: 30px;
     color: #448899;
     cursor: pointer;
-    font-weight: bold;
 }
 
-#outter_header{
-    height: 320px;
-    display: flex;
-    margin-left: 19.27%;
-    margin-right: 12.083%;
-    justify-content: space-between;
-    background-image: url('welcome.png');
-    background-position: right;
-    background-repeat: no-repeat;
-}
 
 .inner_right{
     font-size: 16px;
@@ -88,134 +110,137 @@ footer{
     background-color: rgb(145, 219, 219);
 }
 
-#welcome{
-    width: 650px;
-    height: 320px;
-    background-image: url('welcome.png');
-}
-
-#l1{
-    margin-top: 85px;
-    display: flex;
-    align-items: center;
-    font-size: 28px;
-    line-height: 24px;
-    color: #F8F8F8;
-    text-shadow: 0px 0px 30px #AABBCC;
-    font-family: Noto Sans TC;
-    font-style: normal;
+.sub_title{
+    line-height: 23px;
     font-weight: bold;
 }
 
-#l2{
-    margin-top: 15px;
-    font-family: Noto Sans TC;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 13px;
+#attInfo{
+    display: flex;
+    width: 61.458%;
+    height: 406px;
+}
+
+#info_left{
+    position: relative;
+    margin-right: 30px;
+}
+
+.slider{
+    z-index:50;
+}
+
+#left_slider{
+    position: absolute;
+    height: 100%;
     display: flex;
     align-items: center;
-    color: #F8F8F8;
 }
 
-#l3{
-    margin-top: 25px;
-    display: flex;
-    height: 46px;
-}
-
-#search{
-    padding-left: 15px;
-    font-size: 16px;
-    line-height: 13px;
-    border:0px solid;
-    width: 400px;
-    border-top-left-radius: 5px ;
-    border-bottom-left-radius: 5px;
-}
-
-#search_icon:hover{
-    background-color: #276675;
-}
-
-#search_icon{
-    width: 60px;
-    background-color: #448899;
-    border-bottom-right-radius: 5px;
-    border-top-right-radius: 5px ;
+#right_slider{
+    position: absolute;
+    right: 0%;
+    height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+}
+
+#left_btn{
     cursor: pointer;
 }
 
-.imgOut{
-    height: 242px;
-    width: 270px;
-    margin-bottom: 30px;
-    border: 1px solid #E8E8E8;
-    box-sizing: border-box;
+#right_btn{
+    cursor: pointer;
+}
+
+#shell{
+    height: 406px;
+    width: 540px;
+    position: relative;
+    overflow: hidden;
+}
+
+#image_holder{
+    height: 406px;
+    position: absolute;
+    display: flex;
+}
+
+.attImage{
     border-radius: 5px;
-    overflow: hidden; 
+    height: 406px;
+    width: 540px;
+}
+
+#att_title{
     display: flex;
-    flex-direction: column;
     align-items: center;
+    font-size: 24px;
+    height: 33px;
+    width: 100%;
+    line-height: 24px;
+    font-weight: bold;
+}
+#att_mrt{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    width: 100%;
+    margin-bottom: 20px;
+    height: 22px;
+}
+#booking{
+    background: #E8E8E8;
+    padding-left: 20px;
+    border-radius: 5px;
+    height: 302px;
+    width: 100%;
+    border: 1px #E8E8E8 solid;
+}
+
+#book_1,#book_2,#book_date,#book_time,#book_cost{
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+#book_button{
+    margin-top: 25px;
+}
+
+#date{
+    height: 35px;
+}
+
+div > a{
+    font-weight: bold;
+}
+.sub_title{
+    margin-top: 20px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+}
+
+#book_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #448899;
+    border-radius: 5px;
+    color: white;
+    font-size: 19px;
+    width: 154px;
+    height: 36px;
     cursor: pointer;
 }
 
-
-.imgOut_psu{
-    height: 242px;
-    width: 270px;
-    margin-bottom: 30px;
+#book_button:hover{
+    background: #21515e;
 }
 
-
-
-#contentBox{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 55px;
-    width: 60.93%;
+#att_desc{
+    width: 61.458%;
 }
-
-.attName{
-    font-family: Noto Sans TC;
-    width: 250px;
-    height: 22px;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 13px;
-    display: flex;
-    align-items: center;
-    color: #757575;
-    margin-top: 12px;;
-}
-.desc{
-    display: flex;
-    justify-content: space-between;
-    width: 250px;
-    margin-top: 15px;
-    font-family: Noto Sans TC;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 13px;
-    /* or 83% */
-    display: flex;
-    align-items: center;
-    /* Gray 700 */
-    color: #757575;
-}
-
-.desc_r{
-    text-align:right;
-}
-
 
 @media (max-width:600px) {
     header{
@@ -236,26 +261,6 @@ footer{
     }
     #outter_title{
         width: 94.44%;
-    }
-    .imgOut{
-        width: 89.44%;
-        height: 280px;
-        margin-bottom: 15px;
-    }
-    .attName{
-        margin-top: 8px;
-        width: 93.78%;
-    }
-    .desc{
-        width: 93.78%;
-    }
-    .attImage{
-        width: 100%;
-        height: 202px;
-    }
-    #contentBox{
-        width: 100%;
-        justify-content: center;
     }
 }
 
