@@ -4,9 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='att.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/att.css') }}">
     <title>台北一日遊</title>
-    <script src="{{ url_for('static', filename='att.js') }}"></script>
 </head>
 
 <body>
@@ -17,9 +16,12 @@
     <main>
         <div id='attInfo'>
             <div id="info_left">
-                <div class="slider" id="left_slider"><img id="left_btn" src="{{url_for('static',filename='btn_leftArrow.png')}}"></div>
-                <div class="slider" id="right_slider"><img id="right_btn" src="{{url_for('static',filename='btn_rightArrow.png')}}"></div>
+                <div class="slider" id="left_slider"><img id="left_btn"
+                        src="{{url_for('static',filename='pic/btn_leftArrow.png')}}"></div>
+                <div class="slider" id="right_slider"><img id="right_btn"
+                        src="{{url_for('static',filename='pic/btn_rightArrow.png')}}"></div>
                 <div id="shell"></div>
+                <div id="light"></div>
             </div>
             <div id="info_right">
                 <div id="att_title"></div>
@@ -27,8 +29,9 @@
                 <div id="booking">
                     <div id="book_1"><a>訂購導覽行程</a></div>
                     <div id="book_2">以此景點為中心的一日行程，帶您探索城市角落故事</div>
-                    <div id="book_date"><a>選擇日期：</a><input id ="date" type="date"></div>
-                    <div id="book_time"><a>選擇時間：</a><input type="radio" name="time" value="上半天">上半天<input type="radio" name="time" value="下半天">下半天</div>
+                    <div id="book_date"><a>選擇日期：</a><input id="date" type="date"></div>
+                    <div id="book_time"><a>選擇時間：</a><input type="radio" name="time" value="上半天">上半天<input type="radio"
+                            name="time" value="下半天">下半天</div>
                     <div id="book_cost"><a>導覽費用：</a><span id='price'></span></div>
                     <div id="book_button">開始預訂行程</div>
                 </div>
@@ -46,7 +49,7 @@
             <div class="popup_header"></div>
             <div class="popupcontent" id="popupcontent">
                 <div class="popup_title">登入會員帳號</div>
-                <img class="close_icon" id='close' src="{{ url_for('static', filename='icon_close.png') }}">
+                <img class="close_icon" id='close' src="{{ url_for('static', filename='pic/icon_close.png') }}">
                 <input id='login_email' class='popup_input' placeholder="輸入電子信箱">
                 <input id='login_password' type="password" class='popup_input' placeholder="輸入密碼">
                 <div class="popup_input" id="login_button">
@@ -61,7 +64,7 @@
             <div class="popup_header"></div>
             <div class="popupcontent" id="popupcontent_2">
                 <div class="popup_title">註冊會員帳號</div>
-                <img class="close_icon" id='close_2' src="{{ url_for('static', filename='icon_close.png') }}">
+                <img class="close_icon" id='close_2' src="{{ url_for('static', filename='pic/icon_close.png') }}">
                 <input id='sign_name' class='popup_input' placeholder="輸入姓名">
                 <input id='sign_email' class='popup_input' placeholder="輸入電子信箱">
                 <input id='sign_password' type="password" class='popup_input' placeholder="輸入密碼">
@@ -77,8 +80,7 @@
     <footer>
         COPYRIGHT © 2021 台北一日遊
     </footer>
-
 </body>
-
+<script src="{{ url_for('static', filename='js/att.js') }}"></script>
 
 </html>
