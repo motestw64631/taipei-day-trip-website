@@ -1,6 +1,5 @@
-let leftB = 0;
-let rightB = 1;
-
+let imageShow=0;
+let img;
 
 function getContent(){
     id = window.location.pathname.split('/')[2]
@@ -9,13 +8,12 @@ function getContent(){
           return response.json();
       })
       .then(function(json){
-          console.log(json);
           let address = json['data']['address'];
           let mrt = json['data']['mrt'];
           let name = json['data']['name'];
           let transport = json['data']['transport'];
           let description = json['data']['description'];
-          let img = json['data']['img'];
+          img = json['data']['img'];
           let category = json['data']['category'];
           let nameHolder = document.getElementById('att_title');
           nameHolder.textContent = name;
@@ -27,13 +25,12 @@ function getContent(){
           locationHolder.textContent = address;
           let transportHolder = document.getElementById('att_transport');
           transportHolder.textContent = transport;
-          let imageHolder = document.getElementById('image_holder');
-          for(let i = 0;i < img.length;i++){
-            let image = document.createElement('img');
-            image.src = img[i];
-            image.className = 'attImage';
-            imageHolder.appendChild(image);
-          }
+          let imageShell = document.getElementById('shell');
+          let image = document.createElement('img');
+          image.className = 'attImage';
+          image.id = 'images';
+          image.src = img[0];   
+          imageShell.appendChild(image);
       })
 }
 
@@ -85,22 +82,23 @@ window.onload = function () {
         });
     }
     document.getElementById('right_slider').addEventListener('click',function(){
-        let slider = document.getElementById('image_holder');
-        let width = slider.offsetWidth;
-        let offset = slider.offsetLeft;
-        if((offset+width)==540){
+        let image = document.getElementById('images');
+        let btn = document.getElementById('right_btn');
+        imageShow++;
+        if(imageShow>=img.length){
+            imageShow--;
             return
         }
-        slider.style.left = `${offset-540}px`;
+        image.src = img[imageShow];
     })
     document.getElementById('left_slider').addEventListener('click',function(){
-        let slider = document.getElementById('image_holder');
-        let width = slider.offsetWidth;
-        let offset = slider.offsetLeft;
-        if(offset==0){
+        let image = document.getElementById('images');
+        let btn = document.getElementById('left_btn');
+        if(imageShow<=0){
             return
         }
-        slider.style.left = `${offset+540}px`;
+        imageShow--;
+        image.src = img[imageShow];
     })
 }
 

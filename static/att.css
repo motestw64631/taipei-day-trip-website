@@ -117,8 +117,8 @@ input[type='radio']{
 
 #attInfo{
     display: flex;
+    justify-content: center;
     width: 61.458%;
-    height: 406px;
 }
 
 #info_left{
@@ -157,19 +157,16 @@ input[type='radio']{
     height: 406px;
     width: 540px;
     position: relative;
+    border-radius: 5px;
     overflow: hidden;
 }
 
-#image_holder{
-    height: 406px;
-    position: absolute;
-    display: flex;
-}
+
 
 .attImage{
     border-radius: 5px;
-    height: 406px;
-    width: 540px;
+    height: 100%;
+    width: 100%;
 }
 
 #att_title{
@@ -262,10 +259,48 @@ div > a{
     #outter_title{
         width: 94.44%;
     }
+    #attInfo{
+        display: block;
+        width: 100%;
+    }
+    #info_right{
+        width:100% ;
+    }
+    #info_left{
+        margin-right: 0px;
+        height: 370px;
+    }
+    #shell{
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+    }
+    .attImage{
+        width: 466px;
+        height: 350px;
+    }
+    #att_title{
+        margin-left: 10px;
+    }
+    #att_mrt{
+        margin-left: 10px;
+    }
+    #booking{
+        width: 94.44%;
+        margin: 0 auto;
+    }
+    hr{
+        width: 94.44%;
+        margin-top: 40px;
+    }
+    #att_desc{
+        width: 91.66%;
+    }
 }
 
     .popup{
-        position: absolute;
+        position: fixed;
         top: 0;
         background-color: rgba(0, 0, 0, 0.25);
         width: 100%;
@@ -273,6 +308,7 @@ div > a{
         display: none;
         flex-direction: column;
         align-items: center;
+        z-index: 10000;
     }
 
 
