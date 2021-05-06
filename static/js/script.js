@@ -5,7 +5,7 @@ let searchKeyword;
 
 function loadImages(page, keyword = searchKeyword) {
     let contentBox = document.getElementById('contentBox');
-    let url = (keyword == undefined) ? `/api/attractions?page=${page}` : `http://localhost:3000/api/attractions?page=${page}&keyword=${keyword}`;
+    let url = (keyword == undefined) ? `/api/attractions?page=${page}` : `/api/attractions?page=${page}&keyword=${keyword}`;
     fetch(url)
         .then(function (response) {
             return response.json()

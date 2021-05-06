@@ -212,6 +212,7 @@ input[type='radio']{
 }
 #book_button{
     margin-top: 25px;
+    border: 1px solid silver;
 }
 
 #date{

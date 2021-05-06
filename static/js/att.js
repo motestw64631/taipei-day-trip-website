@@ -15,6 +15,7 @@ function getContent() {
             let address = json['data']['address'];
             let mrt = json['data']['mrt'];
             let name = json['data']['name'];
+            document.title=name;
             let transport = json['data']['transport'];
             let description = json['data']['description'];
             img = json['data']['img'];
