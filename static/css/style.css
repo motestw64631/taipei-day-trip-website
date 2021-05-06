@@ -14,16 +14,23 @@ nav{
     padding: 0px;
     height: 54px;
     top:0px;
+    width: 100%;
     background-color: rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #E8E8E8;
+    z-index: 999;
 }
 
 header{
     height: 320px;
     background:linear-gradient(135deg,#AADDEE,#66AABB);
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
 }
+
+
 
 main{
     display: flex;
@@ -46,9 +53,20 @@ footer{
     color: #FFFFFF;
 }
 
+#bg{
+    position: absolute;
+    right: -3%;
+    height: 100%;
+}
+
+#bg_im{
+    width: 100%;
+    height: 100%;
+}
+
 
 #outter_title{
-    width: 62.5%;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -68,12 +86,9 @@ footer{
 #outter_header{
     height: 320px;
     display: flex;
-    margin-left: 19.27%;
-    margin-right: 12.083%;
     justify-content: space-between;
-    background-image: url("../pic/welcome.png");
-    background-position: right;
-    background-repeat: no-repeat;
+    position: relative;
+    width: 90%;
 }
 
 .inner_right{
@@ -94,12 +109,16 @@ footer{
     background-image: url('welcome.png');
 }
 
+#left_header{
+    z-index: 100;
+}
+
 #l1{
-    margin-top: 85px;
     display: flex;
     align-items: center;
     font-size: 28px;
     line-height: 24px;
+    margin-top: 85px;
     color: #F8F8F8;
     text-shadow: 0px 0px 30px #AABBCC;
     font-family: Noto Sans TC;
@@ -179,7 +198,7 @@ footer{
     align-items: center;
     justify-content: space-between;
     margin-top: 55px;
-    width: 60.93%;
+    width: 90%;
 }
 
 .attName{
@@ -216,23 +235,58 @@ footer{
     text-align:right;
 }
 
-
-@media (max-width:600px) {
-    header{
-        height: 280px;
+@media (min-width:1200px) {
+    #outter_title{
+        width: 1200px;
     }
     #outter_header{
-        background-position: left 148px top 132px;
-        background-size: 276px 148px;
+        width: 1200px;
     }
-    #search{
-        width: 230px;
+    #contentBox{
+        width: 1200px;
+    }
+}
+
+@media(max-width:800px){
+    #bg_im{
+        width: 100%;
+        height: 100%;
+    }
+    #l3{
+        width: 100%;
+    }
+    #left_header{
+        width: 80.55%;
+    }
+    #outter_header{
+        width: 100%;
+        padding-left: 20px;
+    }
+}
+
+
+@media (max-width:600px) {
+    #l1{
+        margin-top: 65px;
+    }
+    #bg{
+        right: 0px;
+        width: 100%;
+    }
+    #bg_im{
+        position: absolute;
+        height: 52.857%;
+        width: auto;
+        right: -17.77%;
+        bottom: 0px;
+    }
+    header{
+        height: 280px;
     }
     #outter_header{
         height: 280px;
         margin-left: 0px;
         margin-right: 0px;
-        padding-left: 20px;
     }
     #outter_title{
         width: 94.44%;

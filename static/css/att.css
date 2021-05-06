@@ -23,7 +23,7 @@ hr {
     margin-top: 37px;
     margin-bottom: 50px;
     align-self: center;
-    width: 80%;
+    width: 90%;
     border: 1px solid #E8E8E8;
   }
 span{
@@ -41,6 +41,7 @@ nav{
     display: flex;
     justify-content: center;
     border-bottom: 1px solid #E8E8E8;
+    width: 100%;
     z-index:999;
 }
 
@@ -79,7 +80,7 @@ input[type='radio']{
 
 
 #outter_title{
-    width: 62.5%;
+    width: 90%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -118,7 +119,7 @@ input[type='radio']{
 #attInfo{
     display: flex;
     justify-content: center;
-    width: 80%%;
+    width: 90%;
 }
 
 #info_left{
@@ -245,11 +246,14 @@ div > a{
 }
 
 #att_desc{
-    width: 80%;
+    width: 90%;
     line-height: 28px;
 }
 
 @media (min-width:1200px) {
+    #outter_title{
+        width: 1200px;
+    }
     hr{
         width: 1200px;
     }
