@@ -15,7 +15,7 @@ with open('./data/taipei-attractions.json') as f:
     data = json.load(f)
 
 Session = sessionmaker(bind=engine)
-session=Session()
+db_session=Session()
 
 
 for i in data['result']['results']:
@@ -30,11 +30,11 @@ for i in data['result']['results']:
     mrt = i['MRT']
     images = image_site_split(i['file'])
     spt = TravelSpot(id,name,transport,category,longitude,latitude,address,describe,mrt)
-    session.add(spt)
+    db_session.add(spt)
     for image in images:
         url = Url(id,image)
-        session.add(url)
-    session.commit()
+        db_session.add(url)
+    db_session.commit()
     
 
 #TravelSpot(name,transport,category,longitude,latitude,address,describe,mrt)

@@ -404,14 +404,12 @@ div > a{
         flex-direction: column;
         align-items: center;
         width: 340px;
-        height: 265px;
         background-color: white;
         border-bottom-left-radius: 6px;
         border-bottom-right-radius: 6px;
     }
 
     #popupcontent_2{
-        height: 322px;
     }
 
     .close_icon{
@@ -446,4 +444,22 @@ div > a{
     text-align: center;
     color: #666666;
     height: 22px;
+    margin-bottom: 15px;
+}
+
+#logout{
+    display: none;
+    cursor: pointer;
+}
+#popbtn{
+    display: none;
+}
+
+.message{
+    color: red;
+    display: flex;
+    justify-content: center;
+    font-size: 16px;
+    line-height: 13px;
+    font-family: Noto Sans TC;
 }

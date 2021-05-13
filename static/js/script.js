@@ -1,6 +1,76 @@
 let nextPage = 0;
 var timeout;
 let searchKeyword;
+let message;
+let user = null;
+
+function logOut() {
+    return fetch('api/user', {
+        method: 'DELETE'
+    })
+}
+
+
+function getUser() {
+    return fetch('/api/user')
+        .then(response => response.json())
+        .then((myjson) => {
+            user = myjson['data'];
+        })
+}
+
+function loginUser(email, password) {
+    fetch('api/user', {
+        body: JSON.stringify({
+            'email': email,
+            'password': password
+        }),
+        method: 'PATCH',
+        headers: {
+            'user-agent': 'Mozilla/4.0 MDN Example',
+            'content-type': 'application/json'
+        },
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myjson) {
+            let mesDiv = document.getElementById('login_message');
+            mesDiv.style.paddingBottom = '10px';
+            if (myjson['error']) {
+                mesDiv.textContent = 'Email 或密碼錯誤';
+            } else if (myjson['ok']) {
+                window.location.reload();
+            }
+        });
+}
+
+function postUser(name, email, password) {
+    fetch('api/user', {
+        body: JSON.stringify({
+            'name': name,
+            'email': email,
+            'password': password
+        }),
+        method: 'POST',
+        headers: {
+            'user-agent': 'Mozilla/4.0 MDN Example',
+            'content-type': 'application/json'
+        },
+    })
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (myjson) {
+            let mesDiv = document.getElementById('signup_message');
+            mesDiv.style.paddingBottom = '10px';
+            if (myjson['error']) {
+                mesDiv.textContent = '已存在重複email';
+            } else if (myjson['ok']) {
+                mesDiv.textContent = '註冊成功';
+            }
+        });
+}
 
 
 function loadImages(page, keyword = searchKeyword) {
@@ -42,7 +112,7 @@ function loadImages(page, keyword = searchKeyword) {
                 content.appendChild(desc);
                 contentBox.appendChild(content);
                 nextPage = myJson['nextPage'];
-                content.addEventListener('click',function(){
+                content.addEventListener('click', function () {
                     window.location.href = `/attraction/${hId}`
                 })
             }
@@ -69,6 +139,7 @@ function loadImagesbysearch() {
 
 
 window.onload = function () {
+    //load main content
     clearTimeout(timeout)
     timeout = setTimeout(function () {
         if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight * 0.95) {
@@ -87,37 +158,70 @@ window.onload = function () {
             }, 150);
         }
     })
-    document.getElementById('title').addEventListener('click',function(){
-        window.location.href = "/";
+    //login check
+    getUser().then(() => {
+        if (user) {
+            document.getElementById('logout').style.display = 'inline';
+        } else {
+            document.getElementById('popbtn').style.display = 'inline';
+        }
     })
-    document.getElementById('popbtn').addEventListener('click', function () {
+
+
+    //event 
+    document.getElementById('title').addEventListener('click', function () {
+        window.location.href = "/";
+    });
+    document.getElementById('logout').addEventListener('click', function () {
+        logOut();
+        window.location.reload();
+    });
+    document.getElementById('popbtn').addEventListener('click', function (ev) {
         document.getElementById('popup').style.display = 'flex';
+        ev.stopPropagation(); //防止觸發點及外部事件
     });
     document.getElementById('close').addEventListener('click', function () {
         document.getElementById('popup').style.display = 'none';
-    })
+    });
     document.getElementById('close_2').addEventListener('click', function () {
         document.getElementById('popup_2').style.display = 'none';
-    })
-    document.getElementById('switchTosign').addEventListener('click', function () {
+    });
+    document.getElementById('switchTosign').addEventListener('click', function (e) {
         document.getElementById('popup').style.display = 'none';
         document.getElementById('popup_2').style.display = 'flex';
-    })
-    document.getElementById('switchTologin').addEventListener('click', function () {
+        e.stopPropagation();
+    });
+    document.getElementById('switchTologin').addEventListener('click', function (e) {
         document.getElementById('popup').style.display = 'flex';
         document.getElementById('popup_2').style.display = 'none';
-    })
-    document.getElementById('login_button').addEventListener('click', function () {
+        e.stopPropagation();
+    });
+    document.getElementById('login_form').addEventListener('submit', function (evt) {
+        evt.preventDefault();
         let email = document.getElementById('login_email').value;
         let password = document.getElementById('login_password').value;
-        console.log(`${email},${password}`)
-    })
-    document.getElementById('sign_button').addEventListener('click', function () {
+        loginUser(email, password);
+    });
+    document.getElementById('signup_form').addEventListener('submit', function (evt) {
+        evt.preventDefault();
         let name = document.getElementById('sign_name').value;
         let email = document.getElementById('sign_email').value;
         let password = document.getElementById('sign_password').value;
-        console.log(`${name},${email},${password}`)
-    })
+        postUser(name, email, password);
+    });
+
+    //當登入視窗開啟,偵測點擊到外部的事件已關閉登入視窗
+    window.addEventListener('mousedown', function (e) {
+        if (document.getElementById('popup').style.display == 'flex') {
+            if (!document.getElementById('popupcontent').contains(e.target)) {
+                document.getElementById('popup').style.display = 'none';
+            }
+        } else if(document.getElementById('popup_2').style.display == 'flex'){
+            if (!document.getElementById('popupcontent_2').contains(e.target)) {
+                document.getElementById('popup_2').style.display = 'none';
+            }
+        }
+    });
 }
 
 
