@@ -47,4 +47,4 @@ def find_name_by_email(email):
 
 if __name__ == '__main__': 
     #db.create_all()
-    print(find_name_by_email('yuyu@qq'))
+    #print(find_name_by_email('yuyu@qq'))
