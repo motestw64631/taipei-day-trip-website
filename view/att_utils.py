@@ -1,18 +1,16 @@
-from .createDB import Base,engine,TravelSpot,Url
+from model import *
 from sqlalchemy import or_
 from sqlalchemy.orm import sessionmaker
 
-'old_version'
 
-Session = sessionmaker(bind=engine)
-db_session=Session()
+
 
 
 def connection_check():
     try:
-        db_session.query(TravelSpot).filter_by(id=0).first()
+        db.session.query(TravelSpot).filter_by(id=0).first()
     except:
-        db_session.rollback()
+        db.session.rollback()
 
 
 
@@ -31,25 +29,25 @@ def data_to_json(data):
     }
 
 def find_attraction_by_id(id):
-    attraction = db_session.query(TravelSpot).filter_by(id=id).first()
+    attraction = db.session.query(TravelSpot).filter_by(id=id).first()
     if not attraction:
         return None
     return data_to_json(attraction)
 
 def find_attraction_all(page):
-    data_count = db_session.query(TravelSpot).count()
+    data_count = db.session.query(TravelSpot).count()
     page_count = data_count//12 
     next_page = page+1 if page<page_count else None
-    data = db_session.query(TravelSpot).slice(12*page,12*(page+1)).all()
+    data = db.session.query(TravelSpot).slice(12*page,12*(page+1)).all()
     data_json = [data_to_json(i) for i in data]
     return {'nextPage':next_page,'data':data_json}
 
 
 def find_attraction_by_name(name,page):
-    data_count =  db_session.query(TravelSpot).filter(or_(TravelSpot.name.like(f'%{name}%'),TravelSpot.category.like(f'%{name}%'))).count()
+    data_count =  db.session.query(TravelSpot).filter(or_(TravelSpot.name.like(f'%{name}%'),TravelSpot.category.like(f'%{name}%'))).count()
     page_count = data_count//12
     next_page = page+1 if page<page_count else None
-    data = db_session.query(TravelSpot).filter(or_(TravelSpot.name.like(f'%{name}%'),TravelSpot.category.like(f'%{name}%'))).slice(12*page,12*(page+1)).all()
+    data = db.session.query(TravelSpot).filter(or_(TravelSpot.name.like(f'%{name}%'),TravelSpot.category.like(f'%{name}%'))).slice(12*page,12*(page+1)).all()
     data_json = [data_to_json(i) for i in data]
     return {'nextPage':next_page,'data':data_json}
 
