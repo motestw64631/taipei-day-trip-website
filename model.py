@@ -11,13 +11,13 @@ class TravelSpot(db.Model):
     # 表的結構
     id = db.Column(db.Integer, primary_key=True,autoincrement=False)
     name = db.Column(db.String(255),nullable=False)
-    transport = db.Column(db.String(8000),nullable=True)
-    category = db.Column(db.String(1000),nullable=False)
+    transport = db.Column(db.Text(8000),nullable=True)
+    category = db.Column(db.Text(1000),nullable=False)
     longitude = db.Column(db.Float,nullable=False)
     latitude = db.Column(db.Float,nullable=False)
-    address = db.Column(db.String(1000),nullable=False)
-    describe = db.Column(db.String(9000),nullable=False)
-    mrt = db.Column(db.String(1000),nullable=True)
+    address = db.Column(db.Text(1000),nullable=False)
+    describe = db.Column(db.Text(9000),nullable=False)
+    mrt = db.Column(db.Text(1000),nullable=True)
     db_url = db.relationship('Url',backref='travelspot')
     def __init__(self,id,name,transport,category,longitude,latitude,address,describe,mrt):
         self.id = id
@@ -37,7 +37,7 @@ class Url(db.Model):
     __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True,autoincrement=True)
     spot_id = db.Column(db.Integer, db.ForeignKey('travel_spot.id'))
-    url = db.Column(db.String(8000),nullable=False)
+    url = db.Column(db.Text(8000),nullable=False)
     db_travel_spot = db.relationship('TravelSpot',backref='url')
     def __init__(self,spot_id,url):
         self.spot_id = spot_id
