@@ -45,9 +45,7 @@ def create_user():
 
 @user_api.route('/api/user',methods=['DELETE'])
 def user_logout():
-	session.pop('id',None)
-	session.pop('name',None)
-	session.pop('email',None)
+	session.clear()
 	return jsonify({
 		'ok':True
 	})

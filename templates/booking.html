@@ -9,8 +9,50 @@
     </head>
     <body>
         <nav>
-            <span id='outter_title'><span id='title'>台北一日遊</span><span><span class='inner_right'>預定行程</span><span
-                        class='inner_right' id='popbtn'>登入/註冊</span></span></span>
+            <span id='outter_title'><span id='title'>台北一日遊</span><span><span class='inner_right' id='toBooking'>預定行程</span><span
+                        class='inner_right' id='popbtn'>登出</span></span></span>
         </nav>
+        <main>
+            <div class="line1">您好，<span id='user_name'></span>，待預定的行程如下：</div>
+            <div id="booking_att">
+                <div id="left_image"><img id='photo'></div>
+                <div id="right_info">
+                    <div id='info1'>台北一日遊：<span id='att'></span></div>
+                    <div id='info'>
+                        <div class='info_inner'>日期：<span class='info_txt' id="bdate"></span></div>
+                        <div class='info_inner'>時間：<span class='info_txt' id="btime"></span></div>
+                        <div class='info_inner'>費用：<span class='info_txt'>新台幣<span id="bprice"></span>元</span></div>
+                        <div class='info_inner'>地點：<span class='info_txt' id="blocate"></span></div>
+                    </div>
+                    <img id='delete' src="{{url_for('static',filename='pic/icon_delete.png')}}">
+                </div>
+            </div>
+            <hr>
+            <div id="contract">
+                <div class="line1">您的聯絡資訊</div>
+                <form id='contract_form'>
+                    <div class='lb'>聯絡姓名：<input type="text" id="contract_name"></div>
+                    <div class='lb'>聯絡信箱：<input type="text" id="contract_mail"></div>
+                    <div class='lb'>聯絡電話：<input type="text" id="contract_phone"></div>
+                </form>
+                <a style="font-weight: bold;">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</a>
+            </div>
+            <hr>
+            <div id="pay">
+                <div class="line1">信用卡付款資訊</div>
+                <form id='pay_form'>
+                    <div class='lb'>卡片號碼：<input type="text" id="contract_name" placeholder="**** **** ****"></div>
+                    <div class='lb'>過期時間：<input type="text" id="contract_mail" placeholder="MM/YY"></div>
+                    <div class='lb'>驗證密碼：<input type="text" id="contract_phone" placeholder="CVV"></div>
+                </form>
+            </div>
+            <hr>
+            <div id="total">總價：新台幣<a id="total_num"></a>元</div>
+            <div id="book_submit_shell"><div id="book_submit">確認訂購並付款</div></div>
+        </main>
+        <script src="{{url_for('static',filename='js/book.js')}}"></script>
+        <footer>
+            COPYRIGHT © 2021 台北一日遊
+        </footer>
     </body>
 </html>

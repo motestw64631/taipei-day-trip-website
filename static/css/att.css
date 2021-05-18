@@ -4,6 +4,11 @@
      box-sizing: border-box; 
 }
 
+[type=button]{
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+}
 
 body{
     padding: 0px;
@@ -462,4 +467,8 @@ div > a{
     font-size: 16px;
     line-height: 13px;
     font-family: Noto Sans TC;
+}
+
+#line_1{
+    width: 1000px;
 }

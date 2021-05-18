@@ -1,3 +1,9 @@
+[type=button]{
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+}
+
 body{
     padding: 0px;
     margin: 0px;
