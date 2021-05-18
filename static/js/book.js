@@ -8,7 +8,7 @@ function initView(){
     document.getElementById('photo').src=bookInfo['data']['attraction']['image'];
     document.getElementById('att').textContent=bookInfo['data']['attraction']['name'];
     document.getElementById('bdate').textContent=bookInfo['data']['date'];
-    document.getElementById('btime').textContent=bookInfo['data']['time'];
+    document.getElementById('btime').textContent=(bookInfo['data']['time']=='afternoon')?'下午2點到晚上9點':'早上9點到下午4點';
     document.getElementById('bprice').textContent=bookInfo['data']['price'];
     document.getElementById('blocate').textContent=bookInfo['data']['attraction']['address'];
     document.getElementById('total_num').textContent=bookInfo['data']['price'];
