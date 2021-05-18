@@ -3,6 +3,28 @@ let img;
 let bulbNum = 0;
 let radioNum = 0;
 
+
+function postBooking(date,time,price){
+    id = window.location.pathname.split('/')[2]
+    return fetch('/api/booking',{
+        body:JSON.stringify({
+            "attractionId": Number(id),
+            "date": date,
+            "time": time,
+            "price": Number(price)
+        }),
+        method:'POST',
+        headers: {
+            'user-agent': 'Mozilla/4.0 MDN Example',
+            'content-type': 'application/json'
+        }
+    })
+    .then(response=>response.json())
+    .then(function(myJson){
+        console.log(myJson)
+    })
+}
+
 function logOut() {
     return fetch('/api/user', {
         method: 'DELETE'
@@ -159,10 +181,34 @@ window.onload = function () {
     getUser().then(() => {
         if (user) {
             document.getElementById('logout').style.display = 'inline';
+
+            document.getElementById('toBooking').addEventListener('click',function(){
+                window.location.href = "/booking";
+            });
+            document.getElementById('book_form').addEventListener('submit',function(e){
+                e.preventDefault()
+                let date=document.getElementById('date').value;
+                let time=document.querySelector('input[name="time"]:checked').value;
+                let price=document.getElementById('price').textContent.replace(/\D/g,'');
+                postBooking(date,time,price);
+                location.href='/booking';
+            })
         } else {
             document.getElementById('popbtn').style.display = 'inline';
+            document.getElementsByName('time')[0].required=false;
+            document.getElementById('date').required=false;
+            document.getElementById('toBooking').addEventListener('click',function(ev){
+                document.getElementById('popup').style.display = 'flex';
+                ev.stopPropagation(); //防止觸發點及外部事件
+            })
+            document.getElementById('book_form').addEventListener('submit',function(e){
+                e.preventDefault()
+                document.getElementById('popup').style.display = 'flex';
+                e.stopPropagation();
+            })
         }
     })
+
 
     document.getElementById('title').addEventListener('click', function () {
         window.location.href = "/";
@@ -205,18 +251,21 @@ window.onload = function () {
         let password = document.getElementById('sign_password').value;
         postUser(name, email, password);
     });
+
+
+
     if (document.querySelector('input[name="time"]')) {
         let price_span = document.getElementById('price')
         document.querySelectorAll('input[name="time"]').forEach((elem) => {
             elem.addEventListener("click", function (event) {
-                let price = (elem.value == '上半天') ? '新台幣2000元' : '新台幣2500元';
+                let price = (elem.value == 'afternoon') ? '新台幣2500元' : '新台幣2000元';
                 price_span.textContent = price;
             });
         });
     }
 
     //當登入視窗開啟,偵測點擊到外部的事件已關閉登入視窗
-    window.addEventListener('click', function (e) {
+    window.addEventListener('mouseup', function (e) {
         if (document.getElementById('popup').style.display == 'flex') {
             if (!document.getElementById('popupcontent').contains(e.target)) {
                 document.getElementById('popup').style.display = 'none';
@@ -227,6 +276,7 @@ window.onload = function () {
             }
         }
     });
+
 }
 
 

@@ -165,8 +165,15 @@ window.onload = function () {
     getUser().then(() => {
         if (user) {
             document.getElementById('logout').style.display = 'inline';
+            document.getElementById('toBooking').addEventListener('click',function(){
+                window.location.href = "/booking";
+            })
         } else {
             document.getElementById('popbtn').style.display = 'inline';
+            document.getElementById('toBooking').addEventListener('click',function(ev){
+                document.getElementById('popup').style.display = 'flex';
+                ev.stopPropagation(); //防止觸發點及外部事件
+            })
         }
     })
 
@@ -214,7 +221,7 @@ window.onload = function () {
     });
 
     //當登入視窗開啟,偵測點擊到外部的事件已關閉登入視窗
-    window.addEventListener('click', function (e) {
+    window.addEventListener('mouseup', function (e) {
         if (document.getElementById('popup').style.display == 'flex') {
             if (!document.getElementById('popupcontent').contains(e.target)) {
                 document.getElementById('popup').style.display = 'none';

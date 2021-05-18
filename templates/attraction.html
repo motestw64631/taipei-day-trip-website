@@ -10,7 +10,7 @@
 
 <body>
     <nav>
-        <span id='outter_title'><span id='title'>台北一日遊</span><span><span class='inner_right'>預定行程</span><span id='logout' class='inner_right'>登出系統</span><span
+        <span id='outter_title'><span id='title'>台北一日遊</span><span><span class='inner_right' id='toBooking'>預定行程</span><span id='logout' class='inner_right'>登出系統</span><span
                     class='inner_right' id='popbtn'>登入/註冊</span></span></span>
     </nav>
     <main>
@@ -29,10 +29,10 @@
                 <div id="booking">
                     <div id="book_1"><a>訂購導覽行程</a></div>
                     <div id="book_2">以此景點為中心的一日行程，帶您探索城市角落故事</div>
-                    <form>
+                    <form id='book_form'>
                     <div id="book_date"><a>選擇日期：</a><input id="date" type="date" required></div>
-                    <div id="book_time"><a>選擇時間：</a><input type="radio" name="time" value="上半天" required>上半天<input type="radio"
-                            name="time" value="下半天">下半天</div>
+                    <div id="book_time"><a>選擇時間：</a><input type="radio" name="time" value="morning" required>上半天<input type="radio"
+                            name="time" value="afternoon">下半天</div>
                     <div id="book_cost"><a>導覽費用：</a><span id='price'></span></div>
                     <input type="submit" id="book_button" value="開始預訂行程"> 
                     </form>

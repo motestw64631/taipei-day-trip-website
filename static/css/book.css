@@ -1,0 +1,187 @@
+form{
+    margin-top: 24px;
+}
+
+input{
+    width: 200px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #E8E8E8;
+    border-radius: 5px;
+}
+footer{
+    margin-top: 72px;
+}
+
+#popbtn{
+    display: inline;
+}
+
+.line1{
+    width: 1000px;
+    font-weight: bold;
+    font-size: 19px;    
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    height: 24px;
+}
+
+#photo{
+    width: 100%;
+    height: 100%;
+}
+
+#left_image{
+    width: 250px;
+    height: 200px;
+}
+
+#booking_att{
+    display: flex;
+    width: 980px;
+    justify-content: space-between;
+    margin-top: 35px;
+}
+
+#right_info{
+    width: 700px;
+    padding-top: 10px;
+    position: relative;
+}
+
+#info1{
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    color: #448899;
+    margin-bottom: 30px;
+}
+
+.info_inner{
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 20px;
+    line-height: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.info_txt{
+    font-weight: normal;
+}
+
+#delete{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    cursor: pointer;
+}
+.lb{
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+#total{
+    font-weight: bold;
+    margin-right: 0px;
+    width: 980px;
+    display: flex;
+    justify-content: flex-end;
+}
+#total_num{
+    display: flex;
+    align-items: center;
+}
+
+#book_submit_shell{
+    margin-right: 0px;
+    width: 980px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 35px;
+}
+
+#book_submit{
+    background: #448899;
+    border-radius: 5px;
+    width: 173px;
+    height: 36px;
+    color: white;
+    font-size: 19px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.noInfo{
+    width: 1000px;
+    padding-top: 35px;
+}
+
+@media (max-width:1200px) {
+    .noInfo{
+        width: 85%;
+    }
+    .line1{
+        width: 85%;
+    }
+    #booking_att{
+        width: 83%;
+    }
+    #right_info{
+        width: 55%;
+    }
+    #contract{
+        width: 85%;
+    }
+    #pay{
+        width: 85%;
+    }
+    #total{
+        width: 85%;
+    }
+
+    #book_submit_shell{
+        width: 85%;
+    }
+}
+
+@media (max-width:600px) {
+    #booking_att{
+        flex-direction: column;
+        align-items: center;
+        width: 94.44%;
+    }
+    #left_image{
+        width: 340px;
+        height: 200px;
+    }
+    .noInfo{
+        width: 94.44%;
+    }
+    .line1{
+        width: 94.44%;
+    }
+    #right_info{
+        width: 94.44%;
+        padding-top: 35px;
+    }
+    #delete{
+        top: auto;
+        bottom: -10px;
+    }
+    #contract{
+        width: 94.44%;
+    }
+    #pay{
+        width: 94.44%;
+    }
+
+
+}
