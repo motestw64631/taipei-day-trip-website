@@ -67,6 +67,9 @@ function postUser(name, email, password) {
                 mesDiv.textContent = '已存在重複email';
             } else if (myjson['ok']) {
                 mesDiv.textContent = '註冊成功';
+                document.getElementById('sign_name').value='';
+                document.getElementById('sign_email').value='';
+                document.getElementById('sign_password').value='';
             }
         });
 }
@@ -213,7 +216,7 @@ window.onload = function () {
     }
 
     //當登入視窗開啟,偵測點擊到外部的事件已關閉登入視窗
-    window.addEventListener('mousedown', function (e) {
+    window.addEventListener('click', function (e) {
         if (document.getElementById('popup').style.display == 'flex') {
             if (!document.getElementById('popupcontent').contains(e.target)) {
                 document.getElementById('popup').style.display = 'none';

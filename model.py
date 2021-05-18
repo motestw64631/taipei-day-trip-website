@@ -1,50 +1,73 @@
-from app import db
+from flask_sqlalchemy import SQLAlchemy
 import datetime
+from werkzeug.security import generate_password_hash,check_password_hash
+
+db = SQLAlchemy()
+
+class TravelSpot(db.Model):
+    # 表的名字
+    __tablename__ = 'travel_spot'
+    __table_args__ = {'extend_existing': True}
+    # 表的結構
+    id = db.Column(db.Integer, primary_key=True,autoincrement=False)
+    name = db.Column(db.String(255),nullable=False)
+    transport = db.Column(db.Text(8000),nullable=True)
+    category = db.Column(db.Text(1000),nullable=False)
+    longitude = db.Column(db.Float,nullable=False)
+    latitude = db.Column(db.Float,nullable=False)
+    address = db.Column(db.Text(1000),nullable=False)
+    describe = db.Column(db.Text(9000),nullable=False)
+    mrt = db.Column(db.Text(1000),nullable=True)
+    db_url = db.relationship('Url',backref='travelspot')
+    def __init__(self,id,name,transport,category,longitude,latitude,address,describe,mrt):
+        self.id = id
+        self.name = name
+        self.transport = transport
+        self.category = category
+        self.longitude = longitude
+        self.latitude = latitude
+        self.address = address
+        self.describe = describe
+        self.mrt = mrt
+    def __repr__(self):
+        return "<Spot('%s')>" % (self.name)
+
+class Url(db.Model):
+    __tablename__ = 'url'
+    __table_args__ = {'extend_existing': True}
+    id = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    spot_id = db.Column(db.Integer, db.ForeignKey('travel_spot.id'))
+    url = db.Column(db.Text(8000),nullable=False)
+    db_travel_spot = db.relationship('TravelSpot',backref='url')
+    def __init__(self,spot_id,url):
+        self.spot_id = spot_id
+        self.url = url
+    def __repr__(self):
+        return f"<url {self.spot_id}>"
 
 
 class User(db.Model):
     __tablename__ = 'user'
     __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer,primary_key=True,autoincrement=True)
-    name = db.Column(db.String(50))
-    email = db.Column(db.String(50))
-    password = db.Column(db.String(50))
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(100))
+    password_hash = db.Column(db.String(500))
     date = db.Column(db.DateTime,default=datetime.datetime.utcnow)
     def __init__(self,name,email,password):
         self.name = name
         self.email = email
-        self.password = password
+        self.password_hash = generate_password_hash(password)
+
+    def __repr__(self):
+        return f'<user {self.name}>'
 
 
 
-
-def addUser(name,email,password):
-    user = User(name,email,password)
-    db.session.add(user)
-    db.session.commit()
-
-def check_if_user_duplicate(email):
-    if  db.session.query(User).filter_by(email=email).count()==0:
-        db.session.remove()
-        return False
-    db.session.remove()
-    return True
-
-def login_check(email,password):
-    if db.session.query(User).filter_by(email=email,password=password).count()==1:
-        db.session.remove()
-        return True
-    db.session.remove()
-    return False
-
-def find_name_by_email(email):
-    user = db.session.query(User).filter_by(email=email).first()
-    db.session.remove()
-    return user.id,user.name,user.email
 
 
 
 
 if __name__ == '__main__': 
-    #db.create_all()
+    db.create_all()
     #print(find_name_by_email('yuyu@qq'))
