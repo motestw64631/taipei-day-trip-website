@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, create_engine,Integer,ForeignKey,Float
 from sqlalchemy.orm import sessionmaker,relationship,backref
 
+#old_version
 
 Base = declarative_base()
 

@@ -4,6 +4,28 @@ let searchKeyword;
 let message;
 let user = null;
 
+function gp_signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+
+function onSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
+    var profile = googleUser.getBasicProfile();
+    fetch('/google_login', {
+      method: 'POST',
+      body: JSON.stringify({ 'id_token': id_token }),
+      headers: {
+        'user-agent': 'Mozilla/4.0 MDN Example',
+        'content-type': 'application/json'
+      },
+    })
+    .then((response)=>gp_signOut())
+    .then(()=>location.reload())
+  }
+
 function logOut() {
     return fetch('api/user', {
         method: 'DELETE'

@@ -3,6 +3,7 @@ import sqlalchemy
 from createDB import Base,engine,TravelSpot,Url
 from sqlalchemy.orm import sessionmaker
 
+#old_version
 
 def image_site_split(s):
     a = s.split('http')

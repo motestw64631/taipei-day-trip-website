@@ -413,7 +413,7 @@ footer{
         cursor: pointer;
     }
 
-.popup_footer{
+.popup_footer {
     font-family: Noto Sans TC;
     font-style: normal;
     font-weight: normal;
@@ -421,10 +421,13 @@ footer{
     line-height: 13px;
     display: flex;
     align-items: center;
+    justify-content: center;
     text-align: center;
     color: #666666;
     height: 22px;
     margin-bottom: 15px;
+    position: relative;
+    width: 100%;
 }
 
 .message{
