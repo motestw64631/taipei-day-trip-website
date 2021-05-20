@@ -286,7 +286,7 @@ window.onload = function () {
     }
 
     //當登入視窗開啟,偵測點擊到外部的事件已關閉登入視窗
-    window.addEventListener('mouseup', function (e) {
+    window.addEventListener('click', function (e) {
         if (document.getElementById('popup').style.display == 'flex') {
             if (!document.getElementById('popupcontent').contains(e.target)) {
                 document.getElementById('popup').style.display = 'none';
