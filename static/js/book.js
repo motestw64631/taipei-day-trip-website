@@ -57,8 +57,7 @@ function events(){
         window.location.href = "/";
     });
     document.getElementById('popbtn').addEventListener('click',function(){
-        logOut();
-        window.location.href = "/";
+        logOut().then(()=>window.location.href = "/");
     })
     document.getElementById('delete').addEventListener('click',function(){
         deleteBooking();

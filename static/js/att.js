@@ -211,8 +211,7 @@ window.onload = function () {
                 let date=document.getElementById('date').value;
                 let time=document.querySelector('input[name="time"]:checked').value;
                 let price=document.getElementById('price').textContent.replace(/\D/g,'');
-                postBooking(date,time,price);
-                location.href='/booking';
+                postBooking(date,time,price).then(()=>location.href='/booking');
             })
         } else {
             document.getElementById('popbtn').style.display = 'inline';
@@ -239,8 +238,7 @@ window.onload = function () {
         e.stopPropagation();
     });
     document.getElementById('logout').addEventListener('click',function(){
-        logOut();
-        window.location.reload();
+        logOut().then(()=>location.reload());
     });
     document.getElementById('close').addEventListener('click', function () {
         document.getElementById('popup').style.display = 'none';

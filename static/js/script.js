@@ -205,8 +205,7 @@ window.onload = function () {
         window.location.href = "/";
     });
     document.getElementById('logout').addEventListener('click', function () {
-        logOut();
-        window.location.reload();
+        logOut().then(()=>location.reload());
     });
     document.getElementById('popbtn').addEventListener('click', function (ev) {
         document.getElementById('popup').style.display = 'flex';
