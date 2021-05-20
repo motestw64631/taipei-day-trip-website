@@ -60,8 +60,7 @@ function events(){
         logOut().then(()=>window.location.href = "/");
     })
     document.getElementById('delete').addEventListener('click',function(){
-        deleteBooking();
-        window.location.reload();
+        deleteBooking().then(()=>location.reload());
     })
     document.getElementById('toBooking').addEventListener('click',function(){
         window.location.href = "/booking";
