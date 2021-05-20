@@ -5,7 +5,7 @@ from google.oauth2 import id_token
 from google.auth.transport import requests
 
 user_api = Blueprint('user_api',__name__)
-google_client_id = '37565685858-clffd8eho5vui87639gjhnjmtie9eu5i.apps.googleusercontent.com'
+google_client_id = ''
 
 @user_api.route('/api/user',methods=['GET'])
 def get_user():
