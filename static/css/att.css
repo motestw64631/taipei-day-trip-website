@@ -438,7 +438,7 @@ div > a{
         cursor: pointer;
     }
 
-.popup_footer{
+.popup_footer {
     font-family: Noto Sans TC;
     font-style: normal;
     font-weight: normal;
@@ -446,10 +446,13 @@ div > a{
     line-height: 13px;
     display: flex;
     align-items: center;
+    justify-content: center;
     text-align: center;
     color: #666666;
     height: 22px;
     margin-bottom: 15px;
+    position: relative;
+    width: 100%;
 }
 
 #logout{
@@ -467,8 +470,4 @@ div > a{
     font-size: 16px;
     line-height: 13px;
     font-family: Noto Sans TC;
-}
-
-#line_1{
-    width: 1000px;
 }

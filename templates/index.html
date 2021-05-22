@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="37565685858-clffd8eho5vui87639gjhnjmtie9eu5i.apps.googleusercontent.com">
     <link rel="stylesheet" href="static/css/style.css">
     <title>台北一日遊</title>
 </head>
@@ -43,7 +44,7 @@
                     <div id='login_message' class="message"></div>
                 </form>
                 <div class="popup_footer">
-                    還沒有帳戶？<a href="#" id='switchTosign'>點此註冊</a>
+                    還沒有帳戶？<a href="#" id='switchTosign'>點此註冊</a><div class="g-signin2" data-onsuccess="onSignIn" data-width="34" style="position: absolute;right: 15px;"></div>
                 </div>
             </div>
         </div>
@@ -69,7 +70,7 @@
         COPYRIGHT © 2021 台北一日遊
     </footer>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
 
 

@@ -53,11 +53,13 @@ class User(db.Model):
     name = db.Column(db.String(100))
     email = db.Column(db.String(100))
     password_hash = db.Column(db.String(500))
+    provider = db.Column(db.String(100))
     date = db.Column(db.DateTime,default=datetime.datetime.utcnow)
-    def __init__(self,name,email,password):
+    def __init__(self,name,email,password,provider):
         self.name = name
         self.email = email
-        self.password_hash = generate_password_hash(password)
+        self.password_hash = generate_password_hash(password) if password is not None else None
+        self.provider = provider
 
     def __repr__(self):
         return f'<user {self.name}>'

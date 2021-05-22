@@ -4,6 +4,28 @@ let searchKeyword;
 let message;
 let user = null;
 
+function gp_signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+
+function onSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
+    var profile = googleUser.getBasicProfile();
+    fetch('/google_login', {
+      method: 'POST',
+      body: JSON.stringify({ 'id_token': id_token }),
+      headers: {
+        'user-agent': 'Mozilla/4.0 MDN Example',
+        'content-type': 'application/json'
+      },
+    })
+    .then((response)=>gp_signOut())
+    .then(()=>location.reload())
+  }
+
 function logOut() {
     return fetch('api/user', {
         method: 'DELETE'
@@ -183,8 +205,7 @@ window.onload = function () {
         window.location.href = "/";
     });
     document.getElementById('logout').addEventListener('click', function () {
-        logOut();
-        window.location.reload();
+        logOut().then(()=>location.reload());
     });
     document.getElementById('popbtn').addEventListener('click', function (ev) {
         document.getElementById('popup').style.display = 'flex';
@@ -221,7 +242,7 @@ window.onload = function () {
     });
 
     //當登入視窗開啟,偵測點擊到外部的事件已關閉登入視窗
-    window.addEventListener('mouseup', function (e) {
+    window.addEventListener('click', function (e) {
         if (document.getElementById('popup').style.display == 'flex') {
             if (!document.getElementById('popupcontent').contains(e.target)) {
                 document.getElementById('popup').style.display = 'none';

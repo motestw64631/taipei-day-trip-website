@@ -57,12 +57,10 @@ function events(){
         window.location.href = "/";
     });
     document.getElementById('popbtn').addEventListener('click',function(){
-        logOut();
-        window.location.href = "/";
+        logOut().then(()=>window.location.href = "/");
     })
     document.getElementById('delete').addEventListener('click',function(){
-        deleteBooking();
-        window.location.reload();
+        deleteBooking().then(()=>location.reload());
     })
     document.getElementById('toBooking').addEventListener('click',function(){
         window.location.href = "/booking";

@@ -3,6 +3,27 @@ let img;
 let bulbNum = 0;
 let radioNum = 0;
 
+function gp_signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+
+function onSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
+    var profile = googleUser.getBasicProfile();
+    fetch('/google_login', {
+      method: 'POST',
+      body: JSON.stringify({ 'id_token': id_token }),
+      headers: {
+        'user-agent': 'Mozilla/4.0 MDN Example',
+        'content-type': 'application/json'
+      },
+    })
+    .then((response)=>gp_signOut())
+    .then(()=>location.reload())
+  }
 
 function postBooking(date,time,price){
     id = window.location.pathname.split('/')[2]
@@ -190,8 +211,7 @@ window.onload = function () {
                 let date=document.getElementById('date').value;
                 let time=document.querySelector('input[name="time"]:checked').value;
                 let price=document.getElementById('price').textContent.replace(/\D/g,'');
-                postBooking(date,time,price);
-                location.href='/booking';
+                postBooking(date,time,price).then(()=>location.href='/booking');
             })
         } else {
             document.getElementById('popbtn').style.display = 'inline';
@@ -218,8 +238,7 @@ window.onload = function () {
         e.stopPropagation();
     });
     document.getElementById('logout').addEventListener('click',function(){
-        logOut();
-        window.location.reload();
+        logOut().then(()=>location.reload());
     });
     document.getElementById('close').addEventListener('click', function () {
         document.getElementById('popup').style.display = 'none';
@@ -265,7 +284,7 @@ window.onload = function () {
     }
 
     //當登入視窗開啟,偵測點擊到外部的事件已關閉登入視窗
-    window.addEventListener('mouseup', function (e) {
+    window.addEventListener('click', function (e) {
         if (document.getElementById('popup').style.display == 'flex') {
             if (!document.getElementById('popupcontent').contains(e.target)) {
                 document.getElementById('popup').style.display = 'none';
