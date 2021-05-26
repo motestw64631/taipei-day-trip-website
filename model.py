@@ -1,5 +1,7 @@
+from enum import unique
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+import os
 from werkzeug.security import generate_password_hash,check_password_hash
 
 db = SQLAlchemy()
@@ -19,6 +21,7 @@ class TravelSpot(db.Model):
     describe = db.Column(db.Text(9000),nullable=False)
     mrt = db.Column(db.Text(1000),nullable=True)
     db_url = db.relationship('Url',backref='travelspot')
+    db_order = db.relationship('Order',backref='travelspot')
     def __init__(self,id,name,transport,category,longitude,latitude,address,describe,mrt):
         self.id = id
         self.name = name
@@ -55,6 +58,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(500))
     provider = db.Column(db.String(100))
     date = db.Column(db.DateTime,default=datetime.datetime.utcnow)
+    db_order = db.relationship('Order',backref='user')
     def __init__(self,name,email,password,provider):
         self.name = name
         self.email = email
@@ -64,8 +68,27 @@ class User(db.Model):
     def __repr__(self):
         return f'<user {self.name}>'
 
+class Order(db.Model):
+    id = db.Column(db.Integer,primary_key=True,autoincrement=True)
+    number=db.Column(db.String(255),unique=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
+    attraction_id = db.Column(db.Integer,db.ForeignKey('travel_spot.id'))
+    state = db.Column(db.Integer,nullable=False)
+    price = db.Column(db.Integer,nullable=False)
+    name = db.Column(db.String(255))
+    email = db.Column(db.String(255))
+    phone = db.Column(db.String(255))
+    date = db.Column(db.DateTime,default=datetime.datetime.utcnow)
 
-
+    def __init__(self,number,user_id,attraction_id,state,price,name,email,phone):
+        self.number = number
+        self.user_id = user_id
+        self.attraction_id = attraction_id
+        self.state = state
+        self.price = price
+        self.name = name
+        self.email = email
+        self.phone=phone
 
 
 

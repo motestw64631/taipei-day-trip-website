@@ -5,7 +5,7 @@ from view.att_utils import find_attraction_by_id
 book_api = Blueprint('book_api',__name__)
 
 @book_api.route('/api/booking',methods=['GET'])
-#@login_auth
+@login_auth
 def get_booking():
     if 'a_id' not in session:
         data=None
