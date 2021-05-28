@@ -1,0 +1,11 @@
+#thankyou{
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+footer{
+    box-shadow:rgb(117 117 117) 0px 50vh 0px 50vh;
+}

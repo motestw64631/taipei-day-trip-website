@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="37565685858-clffd8eho5vui87639gjhnjmtie9eu5i.apps.googleusercontent.com">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/thankyou.css')}}">
+    <title>台北一日遊</title>
+</head>
+
+<body>
+    <nav>
+        <span id='outter_title'><span id='title'>台北一日遊</span><span><span class='inner_right' id='toBooking'>預定行程</span><span id='logout' class='inner_right'>登出系統</span></span></span>
+    </nav>
+    <main>
+        <div id='thankyou'>
+            <div>恭喜完成預定!</div>
+            <div>訂單標號：<a id='number'></a></div>
+        </div>
+    </main>
+    <footer>
+        COPYRIGHT © 2021 台北一日遊
+    </footer>
+    <script src="{{ url_for('static', filename='js/thankyou.js') }}"></script>
+</body>
+
+
+</html>
