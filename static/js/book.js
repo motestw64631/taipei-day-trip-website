@@ -105,6 +105,12 @@ function onClick() {
                 location.href =`/thankyou?number=${myJson['number']}`
             };
         })
+        document.querySelector('main').style.display='none';
+        let loading = document.createElement('img');
+        loading.src='static/pic/loading.gif';
+        let body = document.querySelector('body');
+        body.style.textAlign='center';
+        body.insertBefore(loading,document.querySelector('footer'));
     })
 }
 
