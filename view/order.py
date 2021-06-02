@@ -9,6 +9,8 @@ import os
 from view.auth_utils import login_auth
 
 order_api = Blueprint('order_api',__name__)
+x_api_key = os.getenv('x_api_key')
+
 
 def clearBooking():
     session.pop('a_id',None)
@@ -20,11 +22,11 @@ def clearBooking():
 def post_to_tappay(prime,price,phone,name,email):
     header = {
         "Content-Type": "application/json",
-        "x-api-key": "partner_ZZr4kSXAHWuZrcAUiQ00aDN6KCCjTgkfQiUVs1ExzNFmHmz4zcagUS5O"
+        "x-api-key": x_api_key
     }
     body = {
         "prime": str(prime),
-        "partner_key": "partner_ZZr4kSXAHWuZrcAUiQ00aDN6KCCjTgkfQiUVs1ExzNFmHmz4zcagUS5O",
+        "partner_key": x_api_key,
         "merchant_id": "myweb_CTBC",
         "details":"TapPay Test",
         "amount": price,
