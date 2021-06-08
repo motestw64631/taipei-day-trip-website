@@ -305,6 +305,7 @@ div > a{
     }
     #info_right{
         width:100% ;
+        margin-top: 10px;
     }
     #info_left{
         margin-right: 0px;

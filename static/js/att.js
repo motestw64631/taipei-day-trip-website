@@ -2,48 +2,67 @@ let imageShow = 0;
 let img;
 let bulbNum = 0;
 let radioNum = 0;
+var images = [];
+
+function preloadImages(urls) {
+    var loadedCounter = 0;
+    urls.forEach(function (url) {
+        preloadImage(url, function () {
+            loadedCounter++;
+            console.log('Number of loaded images: ' + loadedCounter);
+        });
+    });
+    function preloadImage(url, anImageLoadedCallback) {
+        var img = new Image();
+        img.onload = anImageLoadedCallback;
+        img.src = url;
+    }
+}
+
+
+
 
 function gp_signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-      console.log('User signed out.');
+        console.log('User signed out.');
     });
-  }
+}
 
 function onSignIn(googleUser) {
     var id_token = googleUser.getAuthResponse().id_token;
     var profile = googleUser.getBasicProfile();
     fetch('/google_login', {
-      method: 'POST',
-      body: JSON.stringify({ 'id_token': id_token }),
-      headers: {
-        'user-agent': 'Mozilla/4.0 MDN Example',
-        'content-type': 'application/json'
-      },
+        method: 'POST',
+        body: JSON.stringify({ 'id_token': id_token }),
+        headers: {
+            'user-agent': 'Mozilla/4.0 MDN Example',
+            'content-type': 'application/json'
+        },
     })
-    .then((response)=>gp_signOut())
-    .then(()=>location.reload())
-  }
+        .then((response) => gp_signOut())
+        .then(() => location.reload())
+}
 
-function postBooking(date,time,price){
+function postBooking(date, time, price) {
     id = window.location.pathname.split('/')[2]
-    return fetch('/api/booking',{
-        body:JSON.stringify({
+    return fetch('/api/booking', {
+        body: JSON.stringify({
             "attractionId": Number(id),
             "date": date,
             "time": time,
             "price": Number(price)
         }),
-        method:'POST',
+        method: 'POST',
         headers: {
             'user-agent': 'Mozilla/4.0 MDN Example',
             'content-type': 'application/json'
         }
     })
-    .then(response=>response.json())
-    .then(function(myJson){
-        console.log(myJson)
-    })
+        .then(response => response.json())
+        .then(function (myJson) {
+            console.log(myJson)
+        })
 }
 
 function logOut() {
@@ -110,16 +129,16 @@ function postUser(name, email, password) {
                 mesDiv.textContent = '已存在重複email';
             } else if (myjson['ok']) {
                 mesDiv.textContent = '註冊成功';
-                document.getElementById('sign_name').value='';
-                document.getElementById('sign_email').value='';
-                document.getElementById('sign_password').value='';
+                document.getElementById('sign_name').value = '';
+                document.getElementById('sign_email').value = '';
+                document.getElementById('sign_password').value = '';
             }
         });
 }
 
 function getContent() {
     id = window.location.pathname.split('/')[2]
-    fetch(`/api/attraction/${id}`)
+    return fetch(`/api/attraction/${id}`)
         .then(function (response) {
             return response.json();
         })
@@ -131,6 +150,7 @@ function getContent() {
             let transport = json['data']['transport'];
             let description = json['data']['description'];
             img = json['data']['img'];
+            preloadImages(img);
             let category = json['data']['category'];
             let nameHolder = document.getElementById('att_title');
             nameHolder.textContent = name;
@@ -175,7 +195,6 @@ function getContent() {
                 }
                 image.src = img[imageShow];
                 blb.checked = true;
-                console.log(radioNum)
             })
             document.getElementById('left_btn').addEventListener('click', function () {
                 let image = document.getElementById('images');
@@ -188,7 +207,6 @@ function getContent() {
                 let blb = document.getElementById(`bulb${radioNum}`)
                 image.src = img[imageShow];
                 blb.checked = true;
-                console.log(radioNum)
             })
         })
 }
@@ -203,25 +221,25 @@ window.onload = function () {
         if (user) {
             document.getElementById('logout').style.display = 'inline';
 
-            document.getElementById('toBooking').addEventListener('click',function(){
+            document.getElementById('toBooking').addEventListener('click', function () {
                 window.location.href = "/booking";
             });
-            document.getElementById('book_form').addEventListener('submit',function(e){
+            document.getElementById('book_form').addEventListener('submit', function (e) {
                 e.preventDefault()
-                let date=document.getElementById('date').value;
-                let time=document.querySelector('input[name="time"]:checked').value;
-                let price=document.getElementById('price').textContent.replace(/\D/g,'');
-                postBooking(date,time,price).then(()=>location.href='/booking');
+                let date = document.getElementById('date').value;
+                let time = document.querySelector('input[name="time"]:checked').value;
+                let price = document.getElementById('price').textContent.replace(/\D/g, '');
+                postBooking(date, time, price).then(() => location.href = '/booking');
             })
         } else {
             document.getElementById('popbtn').style.display = 'inline';
-            document.getElementsByName('time')[0].required=false;
-            document.getElementById('date').required=false;
-            document.getElementById('toBooking').addEventListener('click',function(ev){
+            document.getElementsByName('time')[0].required = false;
+            document.getElementById('date').required = false;
+            document.getElementById('toBooking').addEventListener('click', function (ev) {
                 document.getElementById('popup').style.display = 'flex';
                 ev.stopPropagation(); //防止觸發點及外部事件
             })
-            document.getElementById('book_form').addEventListener('submit',function(e){
+            document.getElementById('book_form').addEventListener('submit', function (e) {
                 e.preventDefault()
                 document.getElementById('popup').style.display = 'flex';
                 e.stopPropagation();
@@ -237,8 +255,8 @@ window.onload = function () {
         document.getElementById('popup').style.display = 'flex';
         e.stopPropagation();
     });
-    document.getElementById('logout').addEventListener('click',function(){
-        logOut().then(()=>location.reload());
+    document.getElementById('logout').addEventListener('click', function () {
+        logOut().then(() => location.reload());
     });
     document.getElementById('close').addEventListener('click', function () {
         document.getElementById('popup').style.display = 'none';
@@ -289,7 +307,7 @@ window.onload = function () {
             if (!document.getElementById('popupcontent').contains(e.target)) {
                 document.getElementById('popup').style.display = 'none';
             }
-        } else if(document.getElementById('popup_2').style.display == 'flex'){
+        } else if (document.getElementById('popup_2').style.display == 'flex') {
             if (!document.getElementById('popupcontent_2').contains(e.target)) {
                 document.getElementById('popup_2').style.display = 'none';
             }

@@ -189,6 +189,10 @@ footer{
     cursor: pointer;
 }
 
+.imgOut:hover{
+    border: 1px solid black;
+}
+
 
 .imgOut_psu{
     height: 242px;
@@ -299,7 +303,7 @@ footer{
     }
     .imgOut{
         width: 89.44%;
-        height: 280px;
+        height: auto;
         margin-bottom: 15px;
     }
     .attName{
@@ -308,10 +312,11 @@ footer{
     }
     .desc{
         width: 93.78%;
+        margin-bottom: 13px
     }
     .attImage{
         width: 100%;
-        height: 202px;
+        height: 100%;
     }
     #contentBox{
         width: 100%;

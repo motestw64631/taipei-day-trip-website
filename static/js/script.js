@@ -7,24 +7,24 @@ let user = null;
 function gp_signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-      console.log('User signed out.');
+        console.log('User signed out.');
     });
-  }
+}
 
 function onSignIn(googleUser) {
     var id_token = googleUser.getAuthResponse().id_token;
     var profile = googleUser.getBasicProfile();
     fetch('/google_login', {
-      method: 'POST',
-      body: JSON.stringify({ 'id_token': id_token }),
-      headers: {
-        'user-agent': 'Mozilla/4.0 MDN Example',
-        'content-type': 'application/json'
-      },
+        method: 'POST',
+        body: JSON.stringify({ 'id_token': id_token }),
+        headers: {
+            'user-agent': 'Mozilla/4.0 MDN Example',
+            'content-type': 'application/json'
+        },
     })
-    .then((response)=>gp_signOut())
-    .then(()=>location.reload())
-  }
+        .then((response) => gp_signOut())
+        .then(() => location.reload())
+}
 
 function logOut() {
     return fetch('api/user', {
@@ -90,9 +90,9 @@ function postUser(name, email, password) {
                 mesDiv.textContent = '已存在重複email';
             } else if (myjson['ok']) {
                 mesDiv.textContent = '註冊成功';
-                document.getElementById('sign_name').value='';
-                document.getElementById('sign_email').value='';
-                document.getElementById('sign_password').value='';
+                document.getElementById('sign_name').value = '';
+                document.getElementById('sign_email').value = '';
+                document.getElementById('sign_password').value = '';
             }
         });
 }
@@ -101,7 +101,7 @@ function postUser(name, email, password) {
 function loadImages(page, keyword = searchKeyword) {
     let contentBox = document.getElementById('contentBox');
     let url = (keyword == undefined) ? `/api/attractions?page=${page}` : `/api/attractions?page=${page}&keyword=${keyword}`;
-    fetch(url)
+    return fetch(url)
         .then(function (response) {
             return response.json()
         })
@@ -187,12 +187,12 @@ window.onload = function () {
     getUser().then(() => {
         if (user) {
             document.getElementById('logout').style.display = 'inline';
-            document.getElementById('toBooking').addEventListener('click',function(){
+            document.getElementById('toBooking').addEventListener('click', function () {
                 window.location.href = "/booking";
             })
         } else {
             document.getElementById('popbtn').style.display = 'inline';
-            document.getElementById('toBooking').addEventListener('click',function(ev){
+            document.getElementById('toBooking').addEventListener('click', function (ev) {
                 document.getElementById('popup').style.display = 'flex';
                 ev.stopPropagation(); //防止觸發點及外部事件
             })
@@ -205,7 +205,7 @@ window.onload = function () {
         window.location.href = "/";
     });
     document.getElementById('logout').addEventListener('click', function () {
-        logOut().then(()=>location.reload());
+        logOut().then(() => location.reload());
     });
     document.getElementById('popbtn').addEventListener('click', function (ev) {
         document.getElementById('popup').style.display = 'flex';
@@ -247,7 +247,7 @@ window.onload = function () {
             if (!document.getElementById('popupcontent').contains(e.target)) {
                 document.getElementById('popup').style.display = 'none';
             }
-        } else if(document.getElementById('popup_2').style.display == 'flex'){
+        } else if (document.getElementById('popup_2').style.display == 'flex') {
             if (!document.getElementById('popupcontent_2').contains(e.target)) {
                 document.getElementById('popup_2').style.display = 'none';
             }

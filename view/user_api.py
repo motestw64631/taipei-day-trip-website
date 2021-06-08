@@ -3,9 +3,10 @@ from view.user_utils import *
 from flask import json, session,Blueprint,jsonify,request
 from google.oauth2 import id_token
 from google.auth.transport import requests
+import os
 
 user_api = Blueprint('user_api',__name__)
-google_client_id = '37565685858-clffd8eho5vui87639gjhnjmtie9eu5i.apps.googleusercontent.com'
+google_client_id = os.getenv('google_client_id')
 
 @user_api.route('/api/user',methods=['GET'])
 def get_user():
@@ -29,6 +30,11 @@ def create_user():
 		name = rq['name']
 		email = rq['email']
 		provider = 'native'
+		if '@' not in email:
+			return jsonify({
+				'error':True,
+				'message':'錯誤電子信箱'
+			})
 		if check_if_user_duplicate(email,provider='native'):
 			return jsonify({
 			'error':True,
