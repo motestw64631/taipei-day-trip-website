@@ -5,7 +5,7 @@
 本專案為旅遊訂購行程網站，讓使用者可以在此瀏覽台北各個景點以及下訂導覽行程
 ## 使用技術
 * Frond-End  
-HTML.CSS.JavaScript
+HTML.CSS.JavaScript.RWD
 * Back-End  
 1. MVC架構  
 2. Python 框架為 Flask  
